@@ -1,0 +1,18 @@
+[user]
+	name = paullpp
+	email = plipp2804@gmail.com
+
+[rebase]
+	instructionformat = %s [%an]
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+	default = current
+[alias]
+	cleanup = ! git branch -vv | grep ': gone]' | grep -v '*' | awk '{print $1}' | xargs -r git branch -D
+	subupdate = submodule update --init --recursive
+	adog = log --all --decorate --oneline --graph
+	rp = remote update --prune
+  cleanlocal = ! git pull && git rp && git cleanup
+  l = log -n 15 --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
