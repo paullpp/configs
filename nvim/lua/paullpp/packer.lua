@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
   use('neovim/nvim-lspconfig')
   use('williamboman/mason.nvim')
   use('williamboman/mason-lspconfig.nvim')
+  use('WhoIsSethDaniel/mason-tool-installer.nvim')
   use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-buffer')
@@ -35,5 +36,7 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+  use('f-person/git-blame.nvim')
+  use('tpope/vim-commentary')
 end)
 

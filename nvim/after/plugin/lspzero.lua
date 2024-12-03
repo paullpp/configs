@@ -47,6 +47,43 @@ require('mason-lspconfig').setup({
         }
       })
     end,
+    pylsp = function()
+        require('lspconfig').pylsp.setup {
+          settings = {
+            pylsp = {
+              plugins = {
+                -- formatter options
+                black = { enabled = false },
+                ruff = {
+                  enabled = true,
+                },
+                pycodestyle = { enabled = true, maxLineLength = 150 },
+                pylsp_mypy = {
+                  enabled = true,
+                  report_progress = true,
+                  live_mode = true,
+                  exclude = { "venv", "\\.venv", "migrations", "__pycache__", "\\.git", "\\.tox", "\\.github" },
+                  overrides = vim.env.VIRTUAL_ENV and { true, "--python-executable", vim.env.VIRTUAL_ENV .. "/bin/python" }
+                },
+              },
+            },
+          },
+          flags = {
+            debounce_text_changes = 200,
+          },
+          capabilities = lsp_capabilities,
+        }
+    end,
+    ruff = function()
+      require('lspconfig').ruff.setup {
+        init_options = {
+          settings = {
+            lineLength = 150
+          }
+        },
+        capabilities = lsp_capabilities
+      }
+    end,
   }
 })
 
@@ -55,8 +92,8 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
   sources = cmp.config.sources({
-    {name = 'nvim_lsp'},  
-    {name = 'luasnip'},  
+    {name = 'nvim_lsp'},
+    {name = 'luasnip'},
   }, {
     {name = 'buffer'},
   }),
