@@ -20,7 +20,7 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'ts_ls', 'eslint', 'bashls', 'cssls', 'docker_compose_language_service', 'dockerls', 'html', 'lua_ls', 'pylsp'},
+  ensure_installed = {'ts_ls', 'eslint', 'bashls', 'cssls', 'docker_compose_language_service', 'dockerls', 'html', 'lua_ls', 'pylsp', 'gopls', 'sqls', 'terraformls', 'tflint'},
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({
@@ -83,6 +83,32 @@ require('mason-lspconfig').setup({
         },
         capabilities = lsp_capabilities
       }
+    end,
+    gopls = function()
+      require('lspconfig').gopls.setup({
+        capabilities = lsp_capabilities,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+            usePlaceholders = true,
+            completeUnimported = true,
+          },
+        },
+      })
+    end,
+    ts_ls = function()
+      require('lspconfig').ts_ls.setup({
+        capabilities = lsp_capabilities
+      })
+    end,
+    terraformls = function()
+      require('lspconfig').terraformls.setup({
+        capabilities = lsp_capabilities
+      })
     end,
   }
 })
