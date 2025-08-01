@@ -6,6 +6,8 @@ alias adog="git adog"
 alias vim="nvim"
 alias python="python3"
 alias pip="pip3"
+alias t="tmux"
+alias ss="source ~/.zshrc"
 
 autoload -U colors && colors
 setopt prompt_subst
